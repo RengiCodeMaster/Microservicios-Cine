@@ -1,0 +1,16 @@
+server:
+  port: 8081
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: movie-service-route
+          uri: lb://MOVIE-SERVICE
+          predicates:
+            - Path=/api/movies/**
+          filters:
+            - StripPrefix=1
